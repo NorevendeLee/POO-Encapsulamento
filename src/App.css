@@ -1,42 +1,75 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  background: #f0eafc;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  width: 320px;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h2 {
+  color: #8e44ad;
+  margin-bottom: 25px;
+  font-weight: 700;
+  font-size: 2rem;
+  user-select: none;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Input com largura total */
+input[type="number"] {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #d8b4fe;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+  margin-bottom: 15px; /* espaço abaixo do input */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+input[type="number"]:focus {
+  border-color: #9b59b6;
+  box-shadow: 0 0 8px #c39bd3;
 }
 
-.card {
-  padding: 2em;
+/* Container dos botões: flex com gap */
+.buttons-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
 }
 
-.read-the-docs {
-  color: #888;
+/* Botões do mesmo tamanho, dividindo o espaço */
+button {
+  flex: 1;
+  background: #a569bd;
+  color: white;
+  border: none;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 5px 15px rgba(165, 105, 189, 0.4);
+}
+
+button:hover {
+  background: #7d3c98;
+  box-shadow: 0 8px 20px rgba(125, 60, 152, 0.6);
+}
+
+#saldo-disponivel {
+  font-size: 1.5rem;
+  color: #6c3483;
+  font-weight: 700;
+  margin-bottom: 20px;
+  user-select: none;
 }
