@@ -6,6 +6,7 @@ function App() {
   const [conta, setConta] = useState<ContaBancaria | null>(null);
   const [saldo, setSaldo] = useState(0);
   const [valor, setValor] = useState('');
+  const [mensagemErro, setMensagemErro] = useState('');
 
   useEffect(() => {
     const novaConta = new ContaBancaria();
@@ -24,31 +25,50 @@ function App() {
       localStorage.setItem('saldo', String(conta.verSaldo()));
       setSaldo(conta.verSaldo());
     }
-  }, [conta, saldo]);
+  }, [conta]);
 
-  function handleDepositar() {
-    if (!conta) return;
-    const v = Number(valor);
-    if (v > 0) {
-      conta.depositar(v);
+  const handleDepositar = () => {
+  const valorNumerico = Number(valor);
+
+  if (conta) {
+    if (valorNumerico <= 0) {
+      setMensagemErro('Digite um valor positivo para depositar 🧐');
+      return;
+    }
+
+    conta.depositar(valorNumerico);
+    setSaldo(conta.verSaldo());
+    setValor('');
+    setMensagemErro('');
+  }
+};
+
+const handleSacar = () => {
+  const valorNumerico = Number(valor);
+
+  if (conta) {
+    if (valorNumerico <= 0) {
+      setMensagemErro('Digite um valor positivo para sacar 🧐');
+      return;
+    }
+
+    if (valorNumerico > conta.verSaldo()) {
+      setMensagemErro('Saldo insuficiente 😢');
+    } else {
+      conta.sacar(valorNumerico);
       setSaldo(conta.verSaldo());
       setValor('');
+      setMensagemErro('');
     }
   }
+};
 
-  function handleSacar() {
-    if (!conta) return;
-    const v = Number(valor);
-    if (v > 0 && v <= saldo) {
-      conta.sacar(v);
-      setSaldo(conta.verSaldo());
-      setValor('');
-    }
-  }
 
   return (
-    <div style={{ padding: 20 }}>
+    <div className="container">
       <h2>Saldo: R$ {saldo.toFixed(2)}</h2>
+
+      {mensagemErro && <p className="mensagem-erro">{mensagemErro}</p>}
 
       <input
         type="number"
@@ -57,12 +77,9 @@ function App() {
         onChange={(e) => setValor(e.target.value)}
       />
 
-      <br /><br />
       <div className="buttons-container">
-      <button onClick={handleDepositar}>Depositar</button>
-      <button onClick={handleSacar} style={{ marginLeft: 10 }}>
-        Sacar
-      </button>
+        <button onClick={handleDepositar}>Depositar</button>
+        <button onClick={handleSacar}>Sacar</button>
       </div>
     </div>
   );

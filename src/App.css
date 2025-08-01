@@ -73,3 +73,7 @@ button:hover {
   margin-bottom: 20px;
   user-select: none;
 }
+
+ .mensagem-erro{
+  color : black;
+ }
